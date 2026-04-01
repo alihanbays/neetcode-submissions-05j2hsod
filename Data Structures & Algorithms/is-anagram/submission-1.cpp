@@ -1,0 +1,37 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        map<char, int> checkAnagramS;
+        map<char, int> checkAnagramT;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (checkAnagramS.count(s[i])) {
+                checkAnagramS.at(s[i]) += 1;
+            } else {
+                checkAnagramS.insert({s[i], 1});
+            }
+
+            if (checkAnagramT.count(t[i])) {
+                checkAnagramT.at(t[i]) += 1;
+            } else {
+                checkAnagramT.insert({t[i], 1});
+            }
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            if (!checkAnagramS.count(t[i]) ||
+                !checkAnagramT.count(s[i]) ||
+                checkAnagramS.at(s[i]) != checkAnagramT.at(s[i]) ||
+                checkAnagramS.at(t[i]) != checkAnagramT.at(t[i])) {
+                    return false;
+                }
+        }
+
+        return true;
+    }
+};
